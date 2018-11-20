@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Meta from 'vue-meta'
 //-- Components
 import Home from '@/components/Home'
 import AboutUs from '@/components/AboutUs'
@@ -9,38 +10,76 @@ import Blog from '@/components/Blog'
 import Faq from '@/components/Faq'
 
 Vue.use(Router)
+Vue.use(Meta)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/:lang/',
       name: 'Home',
       component: Home
     },
     {
-      path: '/about-us',
+      path: '/:lang/about-us',
       name: 'AboutUs',
-      component: AboutUs
+      component: AboutUs,
     },
     {
-      path: '/services',
+      path: '/:lang/services',
       name: 'Services',
-      component: Services
+      component: Services,
     },
     {
-      path: '/products',
+      path: '/:lang/products',
       name: 'Products',
-      component: Products
+      component: Products,
     },
     {
-      path: '/blog',
+      path: '/:lang/blog',
       name: 'Blog',
       component: Blog
     },
     {
-      path: '/faq',
+      path: '/:lang/faq',
+      name: 'Faq',
+      component: Faq
+    },
+    {
+      path: '/:lang/',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/:lang/nosotros',
+      name: 'AboutUs',
+      component: AboutUs
+    },
+    {
+      path: '/:lang/servicios',
+      name: 'Services',
+      component: Services
+    },
+    {
+      path: '/:lang/productos',
+      name: 'Products',
+      component: Products
+    },
+    {
+      path: '/:lang/blog',
+      name: 'Blog',
+      component: Blog
+    },
+    {
+      path: '/:lang/preguntas-frecuentes',
       name: 'Faq',
       component: Faq
     }
-  ]
+  ],
+  linkActiveClass: 'active',
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {
+    if(to.hash) { // if has a hash...
+      return { selector: to.hash } // scroll to the element
+    }
+  }
 })
